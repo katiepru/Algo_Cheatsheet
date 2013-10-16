@@ -143,14 +143,6 @@ Kruskall's Algorithm
 
 Use Union Find for Step \#2. Complexity $m \log n$, where $m$ is the number of edges.
 
-\subsection{Cliques}
-
-Clique is a subgraph in a graph in which all nodes are connected to each other directly.
-Independent set is a subgraph in a graph in which no nodes are connected to each other at all.
-
-MAX-CLIQUE - Iterate from i=n to 1 and call Clique(G, i) on it
-FIND-CLIQUE - remove nodes, and check to see if Clique still exists
-
 \subsection{DFS}
 \begin{enumerate}
     \item Takes $O(n+m)$ time.
@@ -162,7 +154,8 @@ FIND-CLIQUE - remove nodes, and check to see if Clique still exists
 
 \subsection{Van emde Boas Trees}
 
-Van emde Boas Trees - Does everything in $O(\log w)$ or $O(\log \log N)$ time.
+Van emde Boas Trees - Does everything in $O(\log w)$ or $O(\log \log N)$ time,
+where $w = 2^N$, so $logw = loglogN$. N is range.
 
 Fusion Trees - Do everything in $O(\log_{w}{n})$ time or $O(\frac{\log{n}}{\log{w}})$ time.
 
