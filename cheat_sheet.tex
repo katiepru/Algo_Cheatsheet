@@ -28,6 +28,7 @@ $T(n) = a * T\left(\frac{n}{b}\right) + d*f(n)$
     \item $(n^{\log_{b} a}) \mbox{ if }a \ge f(b)$
     \item $(f(n)) \mbox{ if } f(b) > a$
     \item $(n^{\log_{b} a}* \log n) \mbox{ if } f(b) = a$
+    \item $f(n)$ must be multiplicative. $f(ab) = f(a)*f(b)$
 \end{enumerate}
 
 \section{Big O}
@@ -114,7 +115,8 @@ Lemma: Let u be any node and let v be the top node in u's home path.  Then heigh
 Proof:Distance from v to bottom of this array is at least twice the distance of u to the bottom if |green array| = |red array|.  If not equal then v is the root
 Prep: O(n)
 Query: O(logn)  because height(root) n\\
-Combine pointer and decomp to achieve [O(nlogn), O(1)]
+Combine pointer and decomp to achieve [O(nlogn), O(1)]. Four Russians yields
+[O(n), O(1)].
 
 \subsection{Minimal Spanning Tree}
 Greedy Algorithm
