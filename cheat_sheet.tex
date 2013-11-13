@@ -1,14 +1,14 @@
-\documentclass[9pt,twocolumn]{article}
+\documentclass[7pt,twocolumn]{article}
 \usepackage{url,graphicx,tabularx,array,amsmath}
 \usepackage{enumitem}
 \setlist{nolistsep} %-- don't have lists take up shitloads of room
 \setlength{\parskip}{0ex} %--skip lines between paragraphs
 \setlength{\parindent}{0pt} %--don't indent paragraphs
 \usepackage[
-top    = 0.75cm,
-bottom = 0.50cm,
-left   = 0.50cm,
-right  = 0.50cm]{geometry}
+top    = 0.25cm,
+bottom = 0.25cm,
+left   = 0.25cm,
+right  = 0.25cm]{geometry}
 
 \usepackage[compact]{titlesec}
 \titlespacing{\section}{0pt}{0pt}{0pt}
@@ -77,17 +77,6 @@ This takes in an array, and finds the $k$th largest element in the array.
     \item A subgraph is weakly connected if its directed, but would be strongly connected if it was undirected.
     \item Trees have $n-1$ edges. Have at most $n-1$ leaves. Has an average depth of $\log_2 n$
 \end{enumerate}
-
-\subsection{Red Black Trees}
-A binary tree such that:
-\begin{enumerate}
-\item Every node is red or black
-\item Every leaf is black
-\item The children of red nodes are black
-\item Every simple path from a node to a descendent leaf contains the same number of black nodes
-\end{enumerate}
-b(v) = number of black nodes from v to a leaf, not including v
-Claim: The subtree rooted at v has at least 2b(v)-1internal nodes
 
 \subsection{Treaps}
 Generate heap-key h at random.  Insert $(k, h)$ into a treap -- respects tree order for k, and heap order for h\\
@@ -254,5 +243,36 @@ Def: a vertex who's removal would cause the graph to be unconnected.
         or equal to it's DFS number, it is an articulation point. If node has
         more than one child it is an articulation point.
 \end{itemize}
+
+\section{ Graph Transitive Closure }
+\label{sec:_graph_transitive_closure_}
+
+Def: to find the transitive closure of a graph, for every path from one node to
+another, add an edge between the nodes.
+
+\subsection{ Algo to Find Transitive Closure }
+\label{sub:_algo_to_find_transitive_closure_}
+
+Given the graph represented as an adjacency matrix, the transitive closure can
+be computed as $(G + I)^d$, where $d$ is the diameter (longest shortest path).
+
+\begin{itemize}
+    \item Identify the strongly connected components and condense them into
+        single nodes. This turns the graph into a DAG.
+    \item Topsort the graph. The matrix is now upper-triangular. Top right
+        quadrant will be called A, bottom right B, top right C. A and B are each
+        contain $\frac{n}{2}$ edges from the graph and C contains edges from A
+        to B.
+    \item Recursively compute the transitive closures of A and B. The diameter
+         of the graph is now 3.
+    \item Can compute the transitive closure by $(G + I)^3$. Time will be
+        $M(n)$, where $M$ is the time needed to perform matrix multiplication.
+\end{itemize}
+
+
+
+% subsection _algo_to_find_transitive_closure_ (end)
+
+% section _graph_transitive_closure_ (end)
 
 \end{document}
