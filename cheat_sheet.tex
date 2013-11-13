@@ -150,7 +150,7 @@ Use Union Find for Step \#2. Complexity $m \log n$, where $m$ is the number of e
     \item Takes $O(n+m)$ time.
     \item Finds connected components.
     \item Tells you if you have a DAG (Directed Acyclic Graph) - If the DFS contains back edges, then you have a cycle.
-    \item Top sort - Number edges from $n$ to 1 as you finish DFS at a vertex.
+    \item Top sort - Number vertices from $n$ to 1 as you finish DFS at a vertex.
     \item Strongly Connected Components - Top Sort, reverse edges, run DFS in order of Top Sort.
 \end{enumerate}
 
@@ -178,23 +178,23 @@ To successor a number, you compare to min/max. If it's between min and max, you 
 
 The trick here is that if you make one recursive call on input of size $O(\sqrt{N}$, you get $O(\log \log N)$ time.
 
-\section{ Show that Vector Cover is in NPC }
-Vertex Cover is defined as a set of nodes such that every edge in the graph is incident to at least one node in the set.
-\subsection{Converting to a Decision Problem}
-For this problem, we will consider the decision version of the problem defined as follows:\\
-Input: A graph $G$, and an integer $k$\\
-Output: Yes, if $G$ contains a vertex cover of size $k$, no otherwise.
+% \section{ Show that Vector Cover is in NPC }
+% Vertex Cover is defined as a set of nodes such that every edge in the graph is incident to at least one node in the set.
+% \subsection{Converting to a Decision Problem}
+% For this problem, we will consider the decision version of the problem defined as follows:\\
+% Input: A graph $G$, and an integer $k$\\
+% Output: Yes, if $G$ contains a vertex cover of size $k$, no otherwise.
 
-\subsection{k-independent set}
-The k-independent set decision problem is defined as follows:\\
-Input: A graph $G$, and an integer $k$\\
-Output: Yes, if $G$ contains an independent set of size $k$, no otherwise.\\
-\subsection{Claim: The k-independent set problem reduces to the Vertex Cover problem.}
-Let's assume we have a polynomial time solution to the k-independent set problem.\\
-Let's assume that we have a vertex cover $V$ in the graph $G$ of size $k$. This means that every edge in the graph is incident to one of the nodes in $V$. \\
-Let's consider the set $V' = G - V$. No two nodes in $V'$ have an edge between them, because if an edge was between two nodes $u$ and $v$, then one of $u$ and $v$ would be in $V$.\\
-This means that $V'$ is a independent set of length $n-k$.\\
-Hence, if we can solve the Vertex Cover problem in polynomial time, we can solve the k-independent set problem is polynomial time as well.
+% \subsection{k-independent set}
+% The k-independent set decision problem is defined as follows:\\
+% Input: A graph $G$, and an integer $k$\\
+% Output: Yes, if $G$ contains an independent set of size $k$, no otherwise.\\
+% \subsection{Claim: The k-independent set problem reduces to the Vertex Cover problem.}
+% Let's assume we have a polynomial time solution to the k-independent set problem.\\
+% Let's assume that we have a vertex cover $V$ in the graph $G$ of size $k$. This means that every edge in the graph is incident to one of the nodes in $V$. \\
+% Let's consider the set $V' = G - V$. No two nodes in $V'$ have an edge between them, because if an edge was between two nodes $u$ and $v$, then one of $u$ and $v$ would be in $V$.\\
+% This means that $V'$ is a independent set of length $n-k$.\\
+% Hence, if we can solve the Vertex Cover problem in polynomial time, we can solve the k-independent set problem is polynomial time as well.
 
 \section{ Identities }
 Basic identities.
@@ -239,5 +239,20 @@ First we will find the minimum degree $d$ of a spanning tree in $G$, by calling 
 Once we have the minimum degree, we will find the spanning tree $T$ by the node removal technique discussed in class.
 Q.E.D
 
+\section{ Articulation Points }
+Def: a vertex who's removal would cause the graph to be unconnected.
+
+\subsection{ Algo to find in undirected graph: }
+\begin{itemize}
+    \item DFS. If any of a nodes descendants cannot reach back above it (via
+        back edge), it is an articulation point. If the root has more than one
+        child it is an articulation point.
+
+    \item To implement, perform dfs, assigning each node a "low point" number,
+        which is the lowest DFS number it can reach via tree edges and at most
+        one back edge. If any of a nodes children's low points are greater than
+        or equal to it's DFS number, it is an articulation point. If node has
+        more than one child it is an articulation point.
+\end{itemize}
 
 \end{document}
